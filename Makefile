@@ -5,6 +5,7 @@ CC = gcc
 SRCS = $(wildcard src/*.c)
 OBJS = $(SRCS:src/%.c=build/%.o)
 CFLAGS = -I inc
+LDFLAGS = -lm
 
 .PHONY : all
 all : clean build gravsim
@@ -14,7 +15,7 @@ build:
 	mkdir -p build
 
 gravsim : $(OBJS)
-	$(CC) $(OBJS) -o $@
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
 
 build/%.o : src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
